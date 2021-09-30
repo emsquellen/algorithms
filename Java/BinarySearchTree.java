@@ -1,3 +1,5 @@
+
+
 public class BinarySearchTree {
     private static class Node {
         Node left;
@@ -14,7 +16,7 @@ public class BinarySearchTree {
     Node root = null;
 
     public Node search(int key) {
-        return search(root, key);
+        return search(this.root, key);
     }
 
     public void add(int key, int value) {
@@ -52,7 +54,7 @@ public class BinarySearchTree {
     }
 
     public static Node search(Node root, int key) {
-        if (root.key == key || root == null) {
+        if (root == null || root.key == key) {
             return root;
         } else if (root.key < key) {
             return search(root.right, key);
@@ -62,13 +64,7 @@ public class BinarySearchTree {
     }
 
     public static void main(String[] args) {
-        BinarySearchTree a = new BinarySearchTree();
-        a.add(12, 12);
-        System.out.println(a.search(12));
-        a.add(10, 10);
-        System.out.println(a.search(10));
-        a.remove(10);
-        System.out.println(a.search(10));
+
 
     }
 }

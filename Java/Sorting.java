@@ -34,38 +34,38 @@ public class Sorting {
         }
     } // O(n) * O(n) = O(n^2), so always O(n^2)
 
-    public static void doubleSelectionSort(int[] someArray) {
-        int n = someArray.length;
-        int min, max;
-        int left = 0;
-        int right = n - 1;
+    // public static void doubleSelectionSort(int[] someArray) {
+    //     int n = someArray.length;
+    //     int min, max;
+    //     int left = 0;
+    //     int right = n - 1;
 
-        while (left <= right) { // O(n)
-            min = left;
-            max = right;
+    //     while (left <= right) { // O(n)
+    //         min = left;
+    //         max = right;
 
-            for (int i = left + 1; i < right; i++) { // O(n)
-                if (someArray[i] < someArray[min]) {
-                    min = i;
-                }
-            }
-            if (min != left) {
-                swap(someArray, left, min);
+    //         for (int i = left + 1; i < right; i++) { // O(n)
+    //             if (someArray[i] < someArray[min]) {
+    //                 min = i;
+    //             }
+    //         }
+    //         if (min != left) {
+    //             swap(someArray, left, min);
 
-            }
-            for (int j = right - 1; j > left; j--) { // O(n)
-                if (someArray[j] > someArray[max]) {
-                    max = j;
-                }
-            }
-            if (max != right) {
-                swap(someArray, right, max);
+    //         }
+    //         for (int j = right - 1; j > left; j--) { // O(n)
+    //             if (someArray[j] > someArray[max]) {
+    //                 max = j;
+    //             }
+    //         }
+    //         if (max != right) {
+    //             swap(someArray, right, max);
 
-            }
-            left++;
-            right--;
-        } // O(n)
-    }
+    //         }
+    //         left++;
+    //         right--;
+    //     } // O(n)
+    // }
 
     public static void bubbleSort(int[] someArray) {
         for (int i = 0; i < someArray.length - 1; i++) { // O(n)
@@ -142,11 +142,6 @@ public class Sorting {
                 21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20 };
         selectionSort(nums2);
         System.out.println(Arrays.toString(nums2));
-        int[] nums3 = { 48, 8, 78, 67, 7, 79, 21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20, 77, 28, 12, 98, 93, 54, 26, 37,
-                73, 60, 88, 96, 82, 35, 2, 86, 66, 46, 9, 52, 45, 87, 22, 44, 25, 75, 4, 3, 69, 14, 32, 68, 92, 7, 79,
-                21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20 };
-        doubleSelectionSort(nums3);
-        System.out.println(Arrays.toString(nums3));
         int[] nums4 = { 48, 8, 78, 67, 7, 79, 21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20, 77, 28, 12, 98, 93, 54, 26, 37,
                 73, 60, 88, 96, 82, 35, 2, 86, 66, 46, 9, 52, 45, 87, 22, 44, 25, 75, 4, 3, 69, 14, 32, 68, 92, 7, 79,
                 21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20 };
