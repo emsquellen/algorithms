@@ -35,36 +35,36 @@ public class Sorting {
     } // O(n) * O(n) = O(n^2), so always O(n^2)
 
     // public static void doubleSelectionSort(int[] someArray) {
-    //     int n = someArray.length;
-    //     int min, max;
-    //     int left = 0;
-    //     int right = n - 1;
+    // int n = someArray.length;
+    // int min, max;
+    // int left = 0;
+    // int right = n - 1;
 
-    //     while (left <= right) { // O(n)
-    //         min = left;
-    //         max = right;
+    // while (left <= right) { // O(n)
+    // min = left;
+    // max = right;
 
-    //         for (int i = left + 1; i < right; i++) { // O(n)
-    //             if (someArray[i] < someArray[min]) {
-    //                 min = i;
-    //             }
-    //         }
-    //         if (min != left) {
-    //             swap(someArray, left, min);
+    // for (int i = left + 1; i < right; i++) { // O(n)
+    // if (someArray[i] < someArray[min]) {
+    // min = i;
+    // }
+    // }
+    // if (min != left) {
+    // swap(someArray, left, min);
 
-    //         }
-    //         for (int j = right - 1; j > left; j--) { // O(n)
-    //             if (someArray[j] > someArray[max]) {
-    //                 max = j;
-    //             }
-    //         }
-    //         if (max != right) {
-    //             swap(someArray, right, max);
+    // }
+    // for (int j = right - 1; j > left; j--) { // O(n)
+    // if (someArray[j] > someArray[max]) {
+    // max = j;
+    // }
+    // }
+    // if (max != right) {
+    // swap(someArray, right, max);
 
-    //         }
-    //         left++;
-    //         right--;
-    //     } // O(n)
+    // }
+    // left++;
+    // right--;
+    // } // O(n)
     // }
 
     public static void bubbleSort(int[] someArray) {
@@ -95,29 +95,30 @@ public class Sorting {
     private static void merge(int[] someArray, int left, int middle, int right) {
         int leftSize = middle - left + 1;
         int rightSize = right - middle;
-    
+
         int[] leftArray = new int[leftSize];
         int[] rightArray = new int[rightSize];
-    
-        for (int i = 0; i < leftSize; i++){
+
+        for (int i = 0; i < leftSize; i++) {
             leftArray[i] = someArray[left + i];
         }
-        for (int j = 0; j < rightSize; j++){
+        for (int j = 0; j < rightSize; j++) {
             rightArray[j] = someArray[middle + 1 + j];
         }
-    
+
         int i = 0;
         int j = 0;
         int k = left;
-    
-        while ((i < leftSize) && (j < rightSize)){
-            if (leftArray[i] <= rightArray[j]){
+
+        while ((i < leftSize) && (j < rightSize)) {
+            if (leftArray[i] <= rightArray[j]) {
                 someArray[k] = leftArray[i];
                 i++;
             } else {
                 someArray[k] = rightArray[j];
                 j++;
-            } k++;
+            }
+            k++;
         }
         while (i < leftSize) {
             someArray[k] = leftArray[i];
@@ -131,26 +132,78 @@ public class Sorting {
         }
     }
 
+    public static void quickSort(int[] someArray) {
+        int n = someArray.length - 1;
+        recursiveQuickSort(someArray, 0, n);
+    }
+
+    public static void recursiveQuickSort(int[] someArray, int low, int high) {
+        if (low < high) {
+            int mid = partition(someArray, low, high);
+            recursiveQuickSort(someArray, low, mid - 1);
+            recursiveQuickSort(someArray, mid + 1, high);
+        }
+    }
+
+    private static int partition(int[] someArray, int low, int high) {
+        int pivot = someArray[high];
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (someArray[j] <= pivot) {
+                i++;
+                swap(someArray, i, j);
+            }
+        }
+        swap(someArray, i + 1, high);
+        return i + 1;
+    }
+
+    public static void heapSort(int[] someArray) {
+        int n = someArray.length;
+        int mid = n / 2 - 1;
+        for (int i = mid; i >= 0; i--) {
+            heapify(someArray, n, i);
+        }
+        for (int i = n - 1; i > 0; i--) {
+            swap(someArray, 0, i);
+            heapify(someArray, i, 0);
+        }
+    }
+
+    private static void heapify(int[] someArray, int n, int i) {
+        int max = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+
+        if (left < n && someArray[left] > someArray[max]) {
+            max = left;
+        }
+        if (right < n && someArray[right] > someArray[max]) {
+            max = right;
+        }
+        if (max != i) {
+            swap(someArray, i, max);
+            heapify(someArray, n, max);
+
+        }
+    }
+
+    public static boolean isSorted(int[] a) {
+        for (int i = 0; i < a.length - 1; i++) {
+            if (a[i] > a[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         int[] nums = { 48, 8, 78, 67, 7, 79, 21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20, 77, 28, 12, 98, 93, 54, 26, 37,
                 73, 60, 88, 96, 82, 35, 2, 86, 66, 46, 9, 52, 45, 87, 22, 44, 25, 75, 4, 3, 69, 14, 32, 68, 92, 7, 79,
                 21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20 };
-        insertionSort(nums);
+        heapSort(nums);
         System.out.println(Arrays.toString(nums));
-        int[] nums2 = { 48, 8, 78, 67, 7, 79, 21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20, 77, 28, 12, 98, 93, 54, 26, 37,
-                73, 60, 88, 96, 82, 35, 2, 86, 66, 46, 9, 52, 45, 87, 22, 44, 25, 75, 4, 3, 69, 14, 32, 68, 92, 7, 79,
-                21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20 };
-        selectionSort(nums2);
-        System.out.println(Arrays.toString(nums2));
-        int[] nums4 = { 48, 8, 78, 67, 7, 79, 21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20, 77, 28, 12, 98, 93, 54, 26, 37,
-                73, 60, 88, 96, 82, 35, 2, 86, 66, 46, 9, 52, 45, 87, 22, 44, 25, 75, 4, 3, 69, 14, 32, 68, 92, 7, 79,
-                21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20 };
-        bubbleSort(nums4);
-        System.out.println(Arrays.toString(nums4));
-        int[] nums5 = { 48, 8, 78, 67, 7, 79, 21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20, 77, 28, 12, 98, 93, 54, 26, 37,
-                73, 60, 88, 96, 82, 35, 2, 86, 66, 46, 9, 52, 45, 87, 22, 44, 25, 75, 4, 3, 69, 14, 32, 68, 92, 7, 79,
-                21, 97, 29, 36, 19, 5, 63, 64, 10, 1, 20 };
-        mergeSort(nums5);
-        System.out.println(Arrays.toString(nums5));
+        System.out.println(isSorted(nums));
+
     }
 }
